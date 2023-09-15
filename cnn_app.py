@@ -21,7 +21,7 @@ load_model.load_weights("model.h5")
 with open('index_word.json', 'r') as file:
     index_word = json.load(file)
 
-teks_baru = st.text_input("Masukkan Uraian Barang:")
+teks_baru = st.text_input("Masukkan uraian barang (huruf kecil semua):")
 
 #membagi teks menjadi kata-kata
 kata_kata = teks_baru.split()
@@ -47,7 +47,7 @@ def predict_category(X_test):
     return predicted_class
 
 if st.button("PREDIKSI"):
-    input_text = X_test  # Gantilah dengan data input yang sesuai
+    input_text = X_test
 
     # Memanggil fungsi predict_category untuk mendapatkan predicted_class
     predicted_class = predict_category(input_text)
@@ -64,3 +64,8 @@ if st.button("PREDIKSI"):
         keterangan = "Kategori tidak diketahui"
 
     st.write(f"<span style='font-size: 24px;'>KATEGORI: {predicted_class} = {keterangan}</span>", unsafe_allow_html=True)
+
+st.write("")
+st.write("")
+st.write("Keterangan: Apabila muncul ERROR maka data belum tersedia saat ini.")
+
