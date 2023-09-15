@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from keras.models import model_from_json
@@ -21,7 +22,7 @@ load_model.load_weights("model.h5")
 with open('index_word.json', 'r') as file:
     index_word = json.load(file)
 
-teks_baru = st.text_input("Masukkan uraian barang (huruf kecil semua):")
+teks_baru = st.text_input("Masukkan uraian barang (huruf kecil tanpa tanda baca):")
 
 #membagi teks menjadi kata-kata
 kata_kata = teks_baru.split()
@@ -39,6 +40,8 @@ indeks_kata_nested = [indeks_kata[i:i+max_kata] for i in range(0, len(indeks_kat
 #pads sequences
 X_test = pad_sequences(indeks_kata_nested, maxlen = max_kata, padding="post")
 
+#eager execution
+tf.config.run_functions_eagerly(True)
 
 #membuat widget input dan prediksi
 def predict_category(X_test):
@@ -60,7 +63,7 @@ if st.button("PREDIKSI"):
         keterangan = "Alas kaki, sepatu, dan sejenisnya"
     elif predicted_class == 3:
         keterangan = "Lainnya (Non MFN)"
-    else:
+    else :
         keterangan = "Kategori tidak diketahui"
 
     st.write(f"<span style='font-size: 24px;'>KATEGORI: {predicted_class} = {keterangan}</span>", unsafe_allow_html=True)
