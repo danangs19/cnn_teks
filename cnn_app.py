@@ -52,7 +52,7 @@ def predict_category(X_test):
 if st.button("PREDIKSI"):
     input_text = X_test
 
-    # Memanggil fungsi predict_category untuk mendapatkan predicted_class
+    #memanggil fungsi predict_category untuk mendapatkan predicted_class
     predicted_class = predict_category(input_text)
 
     if predicted_class == 0:
