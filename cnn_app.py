@@ -6,6 +6,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from keras.models import model_from_json
 import json
 
+
 st.title("Aplikasi Prediksi Kategori")
 st.title("Barang Kiriman PJT")
 st.write("")
